@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth _auth = FirebaseAuth.instance;
-  Rx<User> _firebaseUser;
+  late Rx<User?> _firebaseUser;
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -15,11 +15,11 @@ class AuthController extends GetxController {
   Rx<UserModel> userModel = UserModel().obs;
   Rx<int> axisCount = 2.obs;
 
-  User get user => _firebaseUser.value;
+  User? get user => _firebaseUser.value;
 
   @override
   void onInit() {
-    _firebaseUser = Rx<User>(_auth.currentUser);
+    _firebaseUser = Rx<User?>(_auth.currentUser);
     _firebaseUser.bindStream(_auth.userChanges());
     super.onInit();
   }
@@ -31,7 +31,7 @@ class AuthController extends GetxController {
               email: email.text.trim(), password: password.text.trim())
           .then((value) {
         UserModel _user = UserModel(
-          id: value.user.uid,
+          id: value.user?.uid,
           name: name.text,
           email: email.text,
         );
@@ -46,7 +46,7 @@ class AuthController extends GetxController {
     } catch (e) {
       Get.snackbar(
         'Error creating account',
-        e.message,
+        e.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -59,12 +59,12 @@ class AuthController extends GetxController {
           email: email.text, password: password.text);
       // .then((value) async {
       Get.find<UserController>().user =
-          await Database().getUser(userCredential.user.uid);
+          await Database().getUser(userCredential.user!.uid);
       _clearControllers();
     } catch (e) {
       Get.snackbar(
         'Error logging in',
-        e.message,
+        e.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -77,7 +77,7 @@ class AuthController extends GetxController {
     } catch (e) {
       Get.snackbar(
         'Error signing out',
-        e.message,
+        e.toString(),
         snackPosition: SnackPosition.BOTTOM,
       );
     }

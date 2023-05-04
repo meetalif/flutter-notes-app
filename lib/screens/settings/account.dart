@@ -1,9 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
 import 'package:flutter_note/controllers/userController.dart';
-import 'package:get/get.dart';
 import 'package:waveui/waveui.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 
 class Account extends StatelessWidget {
   final UserController userController = Get.find<UserController>();
@@ -31,7 +28,7 @@ class Account extends StatelessWidget {
                 ],
               ),
             ),
-            WaveLine(),
+            Divider(),
             ListTile(
               onTap: () {
                 showSignOutDialog(context);
@@ -39,7 +36,7 @@ class Account extends StatelessWidget {
               title: Text("Logout"),
               leading: Icon(FluentIcons.power_28_regular),
             ),
-            WaveLine(),
+            Divider(),
           ],
         ),
       ),
@@ -52,27 +49,26 @@ void showSignOutDialog(BuildContext context) async {
   await showDialog(
     context: context,
     builder: (BuildContext context) {
-      return WaveDialog(
-        titleText: "Are you sure you want to log out?",
-        messageText:
-            'Your notes are already saved so when logging back your noteswill be there.',
-        actionsText: [
-          'Log Out',
-          'Cancel',
-        ],
-        indexedActionCallback: (index) {
-          switch (index) {
-            case 0:
+      return AlertDialog(
+        title: Text("Are you sure you want to log out?"),
+        content: Text(
+            'Your notes are already saved so when logging back your noteswill be there.'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
               Get.back();
               authController.signout();
               Get.close(2);
-              break;
-            case 1:
-              Navigator.of(context).pop();
-              break;
-            default:
-          }
-        },
+            },
+            child: Text("Log Out"),
+          ),
+        ],
       );
     },
   );

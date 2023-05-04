@@ -1,30 +1,28 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
 import 'package:flutter_note/models/noteModel.dart';
 import 'package:flutter_note/services/database.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:waveui/waveui.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 
 class ShowNote extends StatelessWidget {
   final NoteModel noteData;
   final int index;
-  ShowNote({this.noteData, this.index});
+  ShowNote({required this.noteData, required this.index});
   final AuthController authController = Get.find<AuthController>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    titleController.text = noteData.title;
-    bodyController.text = noteData.body;
-    var formattedDate =
-        DateFormat.yMMMd().format(noteData.creationDate.toDate());
-    var time = DateFormat.jm().format(noteData.creationDate.toDate());
+    titleController.text = noteData.title ?? '';
+    bodyController.text = noteData.body ?? '';
+    var formattedDate = DateFormat.yMMMd()
+        .format(noteData.creationDate?.toDate() ?? DateTime.now());
+    var time = DateFormat.jm()
+        .format(noteData.creationDate?.toDate() ?? DateTime.now());
     return Scaffold(
         appBar: WaveAppBar(
-          iconList: [
+          actions: [
             IconButton(
               onPressed: () {
                 showDeleteDialog(context, noteData);
@@ -87,8 +85,8 @@ class ShowNote extends StatelessWidget {
           onPressed: () {
             if (titleController.text != noteData.title ||
                 bodyController.text != noteData.body) {
-              Database().updateNote(authController.user.uid,
-                  titleController.text, bodyController.text, noteData.id);
+              Database().updateNote(authController.user!.uid,
+                  titleController.text, bodyController.text, noteData.id ?? '');
               Get.back();
               titleController.clear();
               bodyController.clear();
@@ -108,26 +106,25 @@ void showDeleteDialog(BuildContext context, noteData) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return WaveDialog(
-        titleText: "Delete Note?",
-        messageText: "Are you sure you want to delete this note?",
-        actionsText: [
-          "Yes",
-          "No",
-        ],
-        indexedActionCallback: (index) {
-          switch (index) {
-            case 0:
+      return AlertDialog(
+        title: Text("Delete Note?"),
+        content: Text("Are you sure you want to delete this note?"),
+        actions: [
+          TextButton(
+            onPressed: () {
               Get.back();
-              Database().delete(authController.user.uid, noteData.id);
+            },
+            child: Text("No"),
+          ),
+          TextButton(
+            onPressed: () {
+              Get.back();
+              Database().delete(authController.user!.uid, noteData.id);
               Get.back(closeOverlays: true);
-              break;
-            case 1:
-              Navigator.of(context).pop();
-              break;
-            default:
-          }
-        },
+            },
+            child: Text("Yes"),
+          ),
+        ],
       );
     },
   );

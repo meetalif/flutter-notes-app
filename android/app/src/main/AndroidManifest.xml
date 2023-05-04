@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_note">
+    package="com.meetalif.notes">
    <application
         android:label="Notes"
         android:icon="@mipmap/ic_launcher">

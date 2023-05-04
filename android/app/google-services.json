@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "868884109886",
-    "project_id": "flutter-note-dbb3a",
-    "storage_bucket": "flutter-note-dbb3a.appspot.com"
+    "project_number": "730265080672",
+    "project_id": "meetalif-notes",
+    "storage_bucket": "meetalif-notes.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:868884109886:android:c49af8a0f40936ec904f6f",
+        "mobilesdk_app_id": "1:730265080672:android:36b4f19b387981252d4405",
         "android_client_info": {
-          "package_name": "com.example.flutter_note"
+          "package_name": "com.meetalif.notes"
         }
       },
       "oauth_client": [
         {
-          "client_id": "868884109886-hirofgah6hncidtaaqs9f615buc4sfaj.apps.googleusercontent.com",
+          "client_id": "730265080672-p85thb48sh7oa9rvvtb5794nju33hbl6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyApTI8Ip8LMMaJD_x24kkhJqRttPDdueA0"
+          "current_key": "AIzaSyAkGedByyAzwjtz6oZi3JhhgOaPg2ohhnY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "868884109886-hirofgah6hncidtaaqs9f615buc4sfaj.apps.googleusercontent.com",
+              "client_id": "730265080672-p85thb48sh7oa9rvvtb5794nju33hbl6.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "868884109886-badajmdp75k6f6tj73038e0qai436b5k.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.flutterNote"
-              }
             }
           ]
         }

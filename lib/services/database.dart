@@ -47,7 +47,7 @@ class Database {
         "creationDate": Timestamp.now(),
       });
     } catch (e) {
-      print(e.message);
+      print(e);
     }
   }
 
@@ -65,7 +65,7 @@ class Database {
         "creationDate": Timestamp.now(),
       });
     } catch (e) {
-      print(e.message);
+      print(e);
     }
   }
 
@@ -78,7 +78,7 @@ class Database {
           .doc(id)
           .delete();
     } catch (e) {
-      print(e.message);
+      print(e);
     }
   }
 

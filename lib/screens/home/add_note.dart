@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
 import 'package:flutter_note/controllers/userController.dart';
 import 'package:flutter_note/services/database.dart';
 import 'package:waveui/waveui.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-import 'package:get/get.dart';
 
 class AddNotePage extends StatelessWidget {
   final UserController userController = Get.find<UserController>();
@@ -67,7 +64,7 @@ class AddNotePage extends StatelessWidget {
               bodyController.text.length == 0) {
             showEmptyTitleDialog(context);
           } else {
-            Database().addNote(authController.user.uid, titleController.text,
+            Database().addNote(authController.user!.uid, titleController.text,
                 bodyController.text);
             Get.back();
           }

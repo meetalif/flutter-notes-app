@@ -1,10 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_note/controllers/authController.dart';
 import 'package:flutter_note/controllers/userController.dart';
 import 'package:flutter_note/screens/auth/signup.dart';
-import 'package:get/get.dart';
 import 'package:waveui/waveui.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 
 class Login extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -34,7 +31,7 @@ class Login extends StatelessWidget {
                     validator: (value) {
                       return RegExp(
                                   r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                              .hasMatch(value)
+                              .hasMatch(value!)
                           ? null
                           : "Please Enter Correct Email";
                     },
@@ -88,14 +85,19 @@ class Login extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            WaveBigMainButton(
-              title: "SIGN IN",
-              bgColor: Colors.black,
-              onTap: () {
-                if (_formKey.currentState.validate()) {
-                  authController.login();
-                }
-              },
+            Row(
+              children: [
+                Expanded(
+                  child: FilledButton(
+                    child: Text("SIGN IN"),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        authController.login();
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 30,

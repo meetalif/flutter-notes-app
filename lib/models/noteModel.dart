@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NoteModel {
-  String id;
-  String title;
-  String body;
-  Timestamp creationDate;
+  String? id;
+  String? title;
+  String? body;
+  Timestamp? creationDate;
 
   NoteModel({this.id, this.title, this.body, this.creationDate});
 

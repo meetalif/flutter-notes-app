@@ -9,13 +9,12 @@ class NoteController extends GetxController {
   Rx<TextEditingController> titleController = TextEditingController().obs;
   Rx<TextEditingController> bodyController = TextEditingController().obs;
 
-
   @override
   void onInit() {
-    String uid = Get.find<AuthController>().user?.uid;
+    String? uid = Get.find<AuthController>().user?.uid;
     print("NoteController onit :: $uid");
-    noteList
-        .bindStream(Database().noteStream(uid)); //stream coming from firebase
+    noteList.bindStream(
+        Database().noteStream("$uid")); //stream coming from firebase
     super.onInit();
   }
 }
